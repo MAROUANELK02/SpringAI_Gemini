@@ -3,38 +3,26 @@ package com.ai.aiapp;
 import com.ai.aiapp.model.Team;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Media;
-import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.vertexai.gemini.VertexAiGeminiChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Description;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 @RestController
 public class GeminiController {
-    private final VertexAiGeminiChatModel chatModel;
     private final ChatClient client;
 
-    public GeminiController(VertexAiGeminiChatModel chatModel, ChatClient.Builder client) {
-        this.chatModel = chatModel;
+    public GeminiController(ChatClient.Builder client) {
         this.client = client.build();
     }
 
@@ -129,5 +117,4 @@ public class GeminiController {
                 .call()
                 .content();
     }
-
 }
