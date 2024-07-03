@@ -5,7 +5,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.vertexai.gemini.VertexAiGeminiChatModel;
+//import org.springframework.ai.vertexai.gemini.VertexAiGeminiChatModel;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.List;
 
-@RestController
+//@RestController
 public class GeminiController {
+    /*
     private final ChatClient client;
 
     public GeminiController(ChatClient.Builder client) {
@@ -38,37 +39,6 @@ public class GeminiController {
                 .call()
                 .content();
     }
-
-    /*
-        record Transaction(String id) {
-        }
-
-        record Status(String name) {
-        }
-
-        private static final Map<Transaction, Status> DATASET =
-                Map.of(
-                        new Transaction("001"), new Status("pending"),
-                        new Transaction("002"), new Status("approved"),
-                        new Transaction("003"), new Status("rejected"));
-
-        @Bean
-        @Description("Get the status of a payment transaction")
-        public Function<Transaction, Status> paymentStatus() {
-            return transaction -> DATASET.get(transaction);
-        }
-
-        @GetMapping("/ai/generate")
-        public String generate() {
-            return chatModel.call(new Prompt("What is the status of my payment transaction 001?")).toString();
-        }
-
-        @GetMapping("/ai/generateStream")
-        public Flux<ChatResponse> generateStream(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
-            Prompt prompt = new Prompt(new UserMessage(message));
-            return chatModel.stream(prompt);
-        }
-    */
 
     @GetMapping(value = "/ai/generate")
     public Team generate(@RequestParam(value = "message", defaultValue = "2022") String message) {
@@ -117,4 +87,5 @@ public class GeminiController {
                 .call()
                 .content();
     }
+    */
 }
