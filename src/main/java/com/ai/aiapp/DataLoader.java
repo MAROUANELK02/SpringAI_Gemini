@@ -26,13 +26,13 @@ public class DataLoader {
     @Value("classpath:/csv/jobs_companies.csv")
     private Resource csvFile;
 
-    @Value("classpath:/pdf/10089434.pdf")
+    @Value("classpath:/csv/jobs_companies.pdf")
     private Resource pdfFile;
 
     @Value("companies.json")
     private String vectorStoreName;
 
-    @Value("resume.json")
+    @Value("company.json")
     private String resumeStoreName;
 
     private final EmbeddingModel embeddingModel;
@@ -43,7 +43,7 @@ public class DataLoader {
     }
 
     //@Bean
-    public SimpleVectorStore simpleVectorStoreCSV(EmbeddingModel embeddingModel) throws IOException, CsvException {
+    public SimpleVectorStore simpleVectorStoreCSV() throws IOException, CsvException {
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
         String path = Path.of("src","main","resources","vectorstore", vectorStoreName).toString();
         File fileStore = new File(path);
@@ -54,12 +54,16 @@ public class DataLoader {
             List<String[]> csvData = csvReader.readAll();
             List<Document> documents = new ArrayList<>();
             for (String[] row : csvData) {
-                Document document = new Document(row[0]);
-                documents.add(document);
+                String skills = row[2]; // colonne "skills"
+                String[] individualSkills = skills.split(","); // séparer les compétences individuelles
+                for (String skill : individualSkills) {
+                    skill = skill.trim(); // supprimer les espaces inutiles
+                    Document document = new Document(skill);
+                    document.setEmbedding(embeddingModel.embed(skill)); // générer l'embedding pour chaque compétence
+                    documents.add(document);
+                }
             }
-            TextSplitter textSplitter = new TokenTextSplitter();
-            List<Document> chunks = textSplitter.split(documents);
-            simpleVectorStore.add(chunks);
+            simpleVectorStore.add(documents);
             simpleVectorStore.save(fileStore);
         }
         return simpleVectorStore;
