@@ -13,7 +13,7 @@ import java.util.List;*/
 public class TestOpenAi {
     public static void main(String[] args) {
         /*
-        OpenAiApi openAiApi = new OpenAiApi("sk-proj-cY8qbi9oW4gu13vNUKuYT3BlbkFJAGH0gautgdh3RfgYUw5c");
+        OpenAiApi openAiApi = new OpenAiApi("OpenAiKey");
         OpenAiChatModel openAiChatModel = new OpenAiChatModel(openAiApi, OpenAiChatOptions.builder()
                 .withModel("gpt-3.5-turbo")
                 .withMaxTokens(4000)

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.List;
 
-//@RestController
+@RestController
 public class GeminiController {
-    /*
+
     private final ChatClient client;
 
     public GeminiController(ChatClient.Builder client) {
@@ -87,5 +87,5 @@ public class GeminiController {
                 .call()
                 .content();
     }
-    */
+
 }
